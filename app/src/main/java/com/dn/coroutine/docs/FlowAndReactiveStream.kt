@@ -16,37 +16,8 @@ import kotlinx.coroutines.runBlocking
  */
 object FlowAndReactiveStream {
 
-    @JvmStatic
-    fun main(args: Array<String>) {
-        simple1().forEach { println("1-打印：$it") }
-        simple2().forEach { println("2-打印：$it") }
-        runBlocking { simple3().forEach { println("3-打印：$it") } }
-        runBlocking {
-            launch {
-                for (k in 1..3){
-                    println("launch：$k")
-                    delay(100L)
-                }
-            }
-            simple4().collect { println(it)  }
-        }
-
-        //冷流
-        runBlocking {
-            println("Calling simple4 function...")
-            val flow=simple4()
-            println("Calling collect...")
-            flow.collect { println(it) }
-            println("Calling collect again...")
-            flow.collect { println(it) }
-        }
-    }
-
     /**
-     *                                      异步流
-     * ---------------------------------------------------------------------------------------------
-     *
-     * ---------------------------------------------------------------------------------------------
+     * 异步流
      */
     //表示多个值
     private fun simple1(): List<Int> = listOf(1, 2, 3)
@@ -74,6 +45,32 @@ object FlowAndReactiveStream {
             delay(100L) //模拟延时
 //            Thread.sleep(100L) //Thread.sleep 代替 delay 以观察主线程在本案例中被阻塞了
             emit("flow: $i")
+        }
+    }
+
+    @JvmStatic
+    fun main(args: Array<String>) {
+        simple1().forEach { println("1-打印：$it") }
+        simple2().forEach { println("2-打印：$it") }
+        runBlocking { simple3().forEach { println("3-打印：$it") } }
+        runBlocking {
+            launch {
+                for (k in 1..3){
+                    println("launch：$k")
+                    delay(100L)
+                }
+            }
+            simple4().collect { println(it)  }
+        }
+
+        //冷流
+        runBlocking {
+            println("Calling simple4 function...")
+            val flow=simple4()
+            println("Calling collect...")
+            flow.collect { println(it) }
+            println("Calling collect again...")
+            flow.collect { println(it) }
         }
     }
 
