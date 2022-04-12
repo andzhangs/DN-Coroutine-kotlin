@@ -14,12 +14,14 @@ class FirstCoroutines {
         fun main(args: Array<String>) = runBlocking {
             //runBlocking 阻塞当前线程来等待。是常规函数
             launch {
+                println("Task from runBlocking launch -> before")
                 delay(1000L)
                 println("2-Task from runBlocking launch")
             }
             //coroutineScope只是挂起，会释放底层线程用于其他用途。是挂起函数
             coroutineScope {
                 launch {
+                    println("Task from nested launch ->before")
                     doWork()
                 }
                 delay(100L)

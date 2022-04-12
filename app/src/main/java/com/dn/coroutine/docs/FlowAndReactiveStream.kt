@@ -1,5 +1,6 @@
 package com.dn.coroutine.docs
 
+import android.util.Log
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -7,6 +8,9 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.forEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.logging.SimpleFormatter
 
 /**
  * @Author zhangshuai
@@ -26,6 +30,7 @@ object FlowAndReactiveStream {
     private fun simple2(): Sequence<Int> = sequence { //序列构造器
         for (i in 1..3) {
             Thread.sleep(100) //模拟计算
+            println("simple2= ${System.currentTimeMillis()}")
             yield(i)
             //relay 是挂起协程并经过执行时间恢复协程，当线程空闲时就会运行协程
             //yield 是挂起协程，让协程放弃本次 cpu 执行机会让给别的协程，当线程空闲时再次运行协程。
@@ -41,10 +46,11 @@ object FlowAndReactiveStream {
     //流, 异步计算的值流
     private fun simple4(): Flow<String> = flow {
         println("Flow started")
-        for (i in 1..3){
-            delay(100L) //模拟延时
+        for (i in 1..3) {
+            delay(1000L) //模拟延时
 //            Thread.sleep(100L) //Thread.sleep 代替 delay 以观察主线程在本案例中被阻塞了
-            emit("flow: $i")
+            val date= SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA).format(Date())
+            emit("simple4::flow: $i，$date")
         }
     }
 
@@ -52,7 +58,13 @@ object FlowAndReactiveStream {
     fun main(args: Array<String>) {
         simple1().forEach { println("1-打印：$it") }
         simple2().forEach { println("2-打印：$it") }
-        runBlocking { simple3().forEach { println("3-打印：$it") } }
+        runBlocking {
+            val date= SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA).format(Date())
+            println("flow::before= $date")
+            simple3().forEach { println("3-打印：$it") }
+            val dat2= SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA).format(Date())
+            println("flow::after= $dat2")
+        }
         runBlocking {
             launch {
                 for (k in 1..3){
@@ -60,13 +72,12 @@ object FlowAndReactiveStream {
                     delay(100L)
                 }
             }
-            simple4().collect { println(it)  }
         }
 
         //冷流
         runBlocking {
             println("Calling simple4 function...")
-            val flow=simple4()
+            val flow = simple4()
             println("Calling collect...")
             flow.collect { println(it) }
             println("Calling collect again...")
