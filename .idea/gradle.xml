@@ -13,7 +13,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/coroutineapp" />
+            <option value="$PROJECT_DIR$/coroutine_lsn1" />
+            <option value="$PROJECT_DIR$/coroutine_lsn2" />
+            <option value="$PROJECT_DIR$/lib_base" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

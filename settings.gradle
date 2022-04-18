@@ -14,4 +14,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "DongNaoCoroutine-kotlin"
 include ':app'
-include ':coroutineapp'
+include ':coroutine_lsn1'
+include ':lib_base'
+include ':coroutine_lsn2'

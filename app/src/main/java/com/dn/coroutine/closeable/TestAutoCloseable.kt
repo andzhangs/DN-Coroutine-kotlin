@@ -1,5 +1,6 @@
 package com.dn.coroutine.closeable
 
+import java.io.Closeable
 import java.lang.Exception
 
 /**
@@ -24,6 +25,9 @@ class TestAutoCloseable {
 
     companion object {
 
+        /**
+         * use函数，该函数只能被实现了Closeable的对象使用，程序结束的时候会自动调用close方法，适合文件对象
+         */
         @JvmStatic
         fun main(args: Array<String>) {
             try {

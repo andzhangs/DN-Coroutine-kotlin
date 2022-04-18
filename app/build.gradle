@@ -2,10 +2,11 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-parcelize'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.6.20'
 }
 
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.dn.coroutine"
@@ -62,13 +63,16 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    //协程
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1'
-    //lifecycleScope
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
-    //viewModelScope
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+//    //协程
+//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
+//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1'
+//    //lifecycleScope
+//    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+//    //viewModelScope
+//    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+//
+//    implementation 'com.google.code.gson:gson:2.8.9'
 
-    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation project(":lib_base")
+
 }
