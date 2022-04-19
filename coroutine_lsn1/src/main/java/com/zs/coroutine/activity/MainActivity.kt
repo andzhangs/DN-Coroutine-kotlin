@@ -89,8 +89,10 @@ class MainActivity : AppCompatActivity() ,CoroutineScope by MainScope(){
     }
 
     //第三步
-    private fun show(userDataModel: UserDataModel) {
+    private suspend fun show(userDataModel: UserDataModel) {
         Log.i("print_logs", "MainActivity::onCreate:结果： $userDataModel")
+        val result = userServiceApi.getUserDataMode2(UserServiceApi.USER_NAME)
+        Log.i("print_logs", "MainActivity::show: ${result.await()}")
     }
     /**
      *                                      优美的分割线

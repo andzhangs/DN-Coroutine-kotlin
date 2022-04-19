@@ -4,6 +4,7 @@ import android.util.Log
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.zs.coroutine.data.UserDataModel
 import io.reactivex.Observable
+import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -58,5 +59,12 @@ interface UserServiceApi {
     @Headers("Accept: application/vnd.github.v3+json")
     @GET("users/{username}")
     suspend fun getUserDataModel(@Path("username") username: String): UserDataModel
+
+    /**
+     * CoroutineCallAdapterFactory的使用场景
+     */
+    @Headers("Accept: application/vnd.github.v3+json")
+    @GET("users/{username}")
+    fun getUserDataMode2(@Path("username") username: String): Deferred<UserDataModel>
 
 }
