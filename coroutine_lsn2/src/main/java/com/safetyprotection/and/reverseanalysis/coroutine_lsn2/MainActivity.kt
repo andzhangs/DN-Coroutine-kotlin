@@ -4,10 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.widget.AppCompatButton
+import androidx.lifecycle.lifecycleScope
 import com.safetyprotection.and.reverseanalysis.coroutine_lsn2.docs.CoroutineWithException
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,6 +30,16 @@ class MainActivity : AppCompatActivity() {
             //全局异常处理
             CoroutineWithException.globalException()
         }
+
+        lifecycleScope.launch{
+            Log.i("print_logs", "MainActivity::onCreate-1: ${Thread.currentThread()}")
+            withContext(Dispatchers.IO){
+                delay(1000L)
+                Log.i("print_logs", "MainActivity::onCreate-2: ${Thread.currentThread()}")
+            }
+            Log.i("print_logs", "MainActivity::onCreate-3: ${Thread.currentThread()}")
+        }
+
     }
 
 

@@ -197,7 +197,7 @@ object FlowOperator {
             emit(2)
             throw IndexOutOfBoundsException()
         }
-        simple2.onCompletion { ex->  //来自上下游异常信息
+        simple2.onCompletion { ex-> //来自上下游异常信息
             if (ex != null){
                 println("声明式：Done 获取异常：$ex")
             }
