@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zs.coroutine.data.UserDataModel
+import com.zs.coroutine.api.data.UserDataModel
 import com.zs.coroutine.repository.UserRepository
 import kotlinx.coroutines.launch
 

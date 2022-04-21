@@ -8,7 +8,7 @@ import android.util.Log
 import android.view.View
 import com.zs.coroutine.api.UserServiceApi
 import com.zs.coroutine.api.userServiceApi
-import com.zs.coroutine.data.UserDataModel
+import com.zs.coroutine.api.data.UserDataModel
 import com.zs.coroutine.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
 import kotlin.coroutines.*

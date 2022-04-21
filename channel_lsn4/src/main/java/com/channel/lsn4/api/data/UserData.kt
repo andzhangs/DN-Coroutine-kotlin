@@ -1,4 +1,4 @@
-package com.zs.coroutine.data
+package com.zs.coroutine.api.data
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

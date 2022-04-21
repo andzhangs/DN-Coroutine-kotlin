@@ -9,7 +9,7 @@ import kotlin.system.measureTimeMillis
  * @Emial zhangshuai@dushu365.com
  * @Description 组合挂起函数并发
  */
-class CombiningPendingFunctions {
+class CoroutineCombiningPendingFunctions {
 
     companion object {
         private suspend fun doSomethingUsefulOne(): Int {

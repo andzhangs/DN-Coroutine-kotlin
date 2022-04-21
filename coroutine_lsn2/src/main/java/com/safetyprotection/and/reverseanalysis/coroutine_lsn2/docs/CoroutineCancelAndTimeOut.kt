@@ -9,7 +9,7 @@ import kotlinx.coroutines.*
  * @Emial zhangshuai@dushu365.com
  * @Description 取消和超时
  */
-class CancelAndTimeOut {
+class CoroutineCancelAndTimeOut {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {

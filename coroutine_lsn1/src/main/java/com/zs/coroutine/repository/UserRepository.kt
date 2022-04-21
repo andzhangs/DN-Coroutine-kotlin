@@ -1,7 +1,7 @@
 package com.zs.coroutine.repository
 
 import com.zs.coroutine.api.userServiceApi
-import com.zs.coroutine.data.UserDataModel
+import com.zs.coroutine.api.data.UserDataModel
 
 /**
  * @author zhangshuai
