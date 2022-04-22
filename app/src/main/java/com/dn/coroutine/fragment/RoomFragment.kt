@@ -15,6 +15,7 @@ import com.dn.coroutine.databinding.FragmentRoomBinding
 import com.dn.coroutine.room.model.User
 import com.dn.coroutine.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -69,10 +70,11 @@ class RoomFragment : Fragment() {
                     Toast.makeText(context, "请输入用户Id", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                lifecycleScope.launch(){
+                lifecycleScope.launchWhenCreated(){
                     mUserViewModel.getUserById(acEtUserId.text.toString()).collect { user ->
                         Log.i("print_logs", "通过ID查询: $user")
                         mAdapter.setData(listOf(user))
+                        cancel()
                     }
                 }
             }
