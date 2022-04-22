@@ -91,7 +91,10 @@ class MainActivity : AppCompatActivity() ,CoroutineScope by MainScope(){
     //第三步
     private suspend fun show(userDataModel: UserDataModel) {
         Log.i("print_logs", "MainActivity::onCreate:结果： $userDataModel")
+
         val result = userServiceApi.getUserDataMode2(UserServiceApi.USER_NAME)
+
+        Log.e("print_logs", "MainActivity::show: ${Thread.currentThread()}")
         Log.i("print_logs", "MainActivity::show: ${result.await()}")
     }
     /**

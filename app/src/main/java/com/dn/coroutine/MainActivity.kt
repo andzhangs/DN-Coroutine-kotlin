@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import com.dn.coroutine.databinding.ActivityMainBinding
 import java.security.MessageDigest
 
@@ -17,15 +18,14 @@ class MainActivity : AppCompatActivity() {
             System.loadLibrary("coroutine")
         }
     }
-    private lateinit var binding: ActivityMainBinding
+    private val binding: ActivityMainBinding by lazy{ ActivityMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.sampleText.text = stringFromJNI()
-        val sha1=MessageDigest.getInstance("SHA-1").digest()
-        Log.i("print_logs", "MainActivity::onCreate: $sha1")
+
+
+
     }
 
 
