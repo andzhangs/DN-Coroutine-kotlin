@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_homeFragment_to_roomFragment"
             app:destination="@id/roomFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_retrofitFragment"
+            app:destination="@id/retrofitFragment" />
     </fragment>
 
     <fragment
@@ -29,5 +32,10 @@
         android:name="com.dn.coroutine.fragment.RoomFragment"
         android:label="fragment_room"
         tools:layout="@layout/fragment_room" />
+    <fragment
+        android:id="@+id/retrofitFragment"
+        android:name="com.dn.coroutine.fragment.RetrofitFragment"
+        android:label="fragment_retrofit"
+        tools:layout="@layout/fragment_retrofit" />
 
 </navigation>

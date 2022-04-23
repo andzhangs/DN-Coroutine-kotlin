@@ -12,13 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dn.coroutine.adapter.UserListAdapter
 import com.dn.coroutine.databinding.FragmentRoomBinding
-import com.dn.coroutine.room.model.User
-import com.dn.coroutine.viewmodel.UserViewModel
-import kotlinx.coroutines.CoroutineStart
+import com.dn.coroutine.room.UserViewModel
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 
 class RoomFragment : Fragment() {

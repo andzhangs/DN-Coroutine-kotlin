@@ -1,10 +1,9 @@
-package com.dn.coroutine.viewmodel
+package com.dn.coroutine.room
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.dn.coroutine.room.AppDataBase
 import com.dn.coroutine.room.dao.UserDao
 import com.dn.coroutine.room.model.User
 import kotlinx.coroutines.Dispatchers
