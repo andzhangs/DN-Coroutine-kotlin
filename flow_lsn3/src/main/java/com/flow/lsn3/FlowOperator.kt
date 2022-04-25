@@ -16,13 +16,13 @@ object FlowOperator {
 
     @JvmStatic
     fun main(args: Array<String>) = runBlocking {
-//        convertOperation()
-//        lengthLimitOperation()
-//        endOperation()
-//        collectOperation()
-//        exhibitionAdvection()
-//        flowException()
-//        flowComplete()
+        convertOperation()
+        lengthLimitOperation()
+        endOperation()
+        collectOperation()
+        exhibitionAdvection()
+        flowException()
+        flowComplete()
     }
 
     /**
@@ -115,7 +115,7 @@ object FlowOperator {
     @OptIn(FlowPreview::class, kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     private fun exhibitionAdvection() = runBlocking {
         println("\n------------------展平流 「flatMapContact,flatMapMerge,flatMapLatest」 ------------------")
-        fun flowMethod(i: Int) = flow<String> {
+        fun flowMethod(i: Int) = flow {
             emit("$i Start")
             delay(500L)
             emit("$i End")
@@ -143,7 +143,7 @@ object FlowOperator {
      */
     private fun flowException() = runBlocking {
         println("\n------------------流异常处理 「try{}catch{},catch」 ------------------")
-        val dataFlow = flow<Int> {
+        val dataFlow = flow {
             for (i in 1..3) {
                 println("Emitting $i")
                 emit(i)

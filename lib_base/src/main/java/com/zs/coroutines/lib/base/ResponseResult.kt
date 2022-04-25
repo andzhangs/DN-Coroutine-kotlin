@@ -12,8 +12,8 @@ import kotlinx.serialization.json.Json
  * 引用地址：https://kotlinlang.org/docs/serialization.html#formats
  */
 @Serializable
-data class ResponseResult(val userName:String)
+data class ResponseResult(val userName: String)
 
 fun main() {
-    val json = Json.encodeToString(ResponseResult("str"))
+    Json.encodeToString(ResponseResult("str"))
 }
