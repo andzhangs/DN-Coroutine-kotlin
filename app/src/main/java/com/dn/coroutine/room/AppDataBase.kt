@@ -22,7 +22,10 @@ abstract class AppDataBase : RoomDatabase() {
         private var instance: AppDataBase? = null
         fun getInstance(context: Context): AppDataBase {
             return instance ?: synchronized(this) {
-                Room.databaseBuilder(context, AppDataBase::class.java, "user.db").build().also {
+                Room.databaseBuilder(context, AppDataBase::class.java, "user.db")
+                    .addMigrations()
+                    .build()
+                    .also {
                     instance = it
                 }
             }

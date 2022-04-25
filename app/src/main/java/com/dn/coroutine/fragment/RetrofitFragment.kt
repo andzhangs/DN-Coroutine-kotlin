@@ -1,5 +1,6 @@
 package com.dn.coroutine.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,7 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.dn.coroutine.databinding.FragmentRetrofitBinding
 import com.dn.coroutine.retrofit.RetrofitViewModel
 import com.google.gson.Gson
@@ -39,12 +43,14 @@ class RetrofitFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lifecycleScope.launchWhenCreated {
-            mBinding.acEtKeyWord.textWatchFlow2().collect { input ->
-                if (input.isNotEmpty()) {
-                    mViewModel.getData(input)
+        lifecycleScope.launch {
+            mBinding.acEtKeyWord.textWatchFlow2()
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collect { input ->
+                    if (input.isNotEmpty()) {
+                        mViewModel.getData(input)
+                    }
                 }
-            }
         }
 
         mViewModel.mLiveData.observe(viewLifecycleOwner) {

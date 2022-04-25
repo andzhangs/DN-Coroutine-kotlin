@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_homeFragment_to_retrofitFragment"
             app:destination="@id/retrofitFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_stateFlowFragment"
+            app:destination="@id/stateFlowFragment" />
     </fragment>
 
     <fragment
@@ -37,5 +40,10 @@
         android:name="com.dn.coroutine.fragment.RetrofitFragment"
         android:label="fragment_retrofit"
         tools:layout="@layout/fragment_retrofit" />
+    <fragment
+        android:id="@+id/stateFlowFragment"
+        android:name="com.dn.coroutine.fragment.StateFlowFragment"
+        android:label="fragment_state_flow"
+        tools:layout="@layout/fragment_state_flow" />
 
 </navigation>

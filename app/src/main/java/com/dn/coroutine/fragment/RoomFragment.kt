@@ -1,5 +1,6 @@
 package com.dn.coroutine.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,13 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dn.coroutine.adapter.UserListAdapter
 import com.dn.coroutine.databinding.FragmentRoomBinding
 import com.dn.coroutine.room.UserViewModel
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 class RoomFragment : Fragment() {
@@ -22,7 +27,7 @@ class RoomFragment : Fragment() {
     private val mBinding: FragmentRoomBinding by lazy { FragmentRoomBinding.inflate(layoutInflater) }
 
     private val mUserViewModel by viewModels<UserViewModel>()
-    private lateinit var mAdapter : UserListAdapter
+    private lateinit var mAdapter: UserListAdapter
 
 
     override fun onCreateView(
@@ -36,13 +41,15 @@ class RoomFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         context?.let {
             mBinding.recyclerView.layoutManager = LinearLayoutManager(it)
-            mAdapter= UserListAdapter(it)
+            mAdapter = UserListAdapter(it)
             mBinding.recyclerView.adapter = mAdapter
-            lifecycleScope.launchWhenCreated {
-                mUserViewModel.getAll().collect { list ->
-                    Log.i("print_logs", "RoomFragment::onViewCreated: 查询所有")
-                    mAdapter.setData(list)
-                }
+            lifecycleScope.launch {
+                mUserViewModel.getAll()
+                    .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                    .collect { list ->
+                        Log.i("print_logs", "RoomFragment::onViewCreated: 查询所有")
+                        mAdapter.setData(list)
+                    }
             }
         }
 
@@ -66,12 +73,14 @@ class RoomFragment : Fragment() {
                     Toast.makeText(context, "请输入用户Id", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                lifecycleScope.launchWhenCreated(){
-                    mUserViewModel.getUserById(acEtUserId.text.toString()).collect { user ->
-                        Log.i("print_logs", "通过ID查询: $user")
-                        mAdapter.setData(listOf(user))
-                        cancel()
-                    }
+                lifecycleScope.launch() {
+                    mUserViewModel.getUserById(acEtUserId.text.toString())
+                        .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                        .collect { user ->
+                            Log.i("print_logs", "通过ID查询: $user")
+                            mAdapter.setData(listOf(user))
+                            cancel()
+                        }
                 }
             }
         }

@@ -5,6 +5,7 @@ import com.dn.coroutine.retrofit.model.HpImageArchiveModel
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -26,6 +27,7 @@ val instance: GithubApiService by lazy {
         .baseUrl("https://cn.bing.com/")
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .build().create(GithubApiService::class.java)
 
 }
