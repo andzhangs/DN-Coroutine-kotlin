@@ -15,7 +15,7 @@ inline fun InputStream.copyTo(
     bufferSize: Int = DEFAULT_BUFFER_SIZE,
     progress: (Long) -> Unit
 ) {
-    var bytesCopied: Long = 0L
+    var bytesCopied = 0L
     val buffer = ByteArray(bufferSize)
     var bytes = read(buffer)
     while (bytes >= 0) {

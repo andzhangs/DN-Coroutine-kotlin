@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import com.dn.coroutine.R
 import com.dn.coroutine.databinding.FragmentStateFlowBinding
 import com.dn.coroutine.stateflow.StateFlowViewModel
 import kotlinx.coroutines.flow.collect
@@ -25,7 +24,7 @@ class StateFlowFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return mBinding.root
     }
 
@@ -47,8 +46,5 @@ class StateFlowFragment : Fragment() {
                     mBinding.acTvNumText.text = it.toString()
                 }
         }
-
     }
-
-
 }

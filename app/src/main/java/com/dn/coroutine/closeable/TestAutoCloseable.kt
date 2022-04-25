@@ -1,6 +1,5 @@
 package com.dn.coroutine.closeable
 
-import java.io.Closeable
 import java.lang.Exception
 
 /**
