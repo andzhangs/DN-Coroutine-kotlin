@@ -156,7 +156,6 @@ object FlowAndReactiveStream {
 
             delay(400L)
             job.cancelAndJoin()
-
         }
 
         //流的取消

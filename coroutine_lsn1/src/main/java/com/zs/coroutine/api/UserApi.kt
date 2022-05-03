@@ -30,7 +30,7 @@ val userServiceApi: UserServiceApi by lazy {
     val retrofit = Retrofit.Builder()
         .client(OkHttpClient.Builder().addInterceptor {
             it.proceed(it.request()).apply {
-                Log.i("print_logs", "request：${code()}")
+                Log.i("print_logs", "request：$code")
             }
         }.build())
         .baseUrl("https://api.github.com/")

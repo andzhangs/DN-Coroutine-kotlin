@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_homeFragment_to_stateFlowFragment"
             app:destination="@id/stateFlowFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_shareFlowFragment"
+            app:destination="@id/shareFlowFragment" />
     </fragment>
 
     <fragment
@@ -45,5 +48,10 @@
         android:name="com.dn.coroutine.fragment.StateFlowFragment"
         android:label="fragment_state_flow"
         tools:layout="@layout/fragment_state_flow" />
+    <fragment
+        android:id="@+id/shareFlowFragment"
+        android:name="com.dn.coroutine.fragment.ShareFlowFragment"
+        android:label="fragment_share_flow"
+        tools:layout="@layout/fragment_share_flow" />
 
 </navigation>

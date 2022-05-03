@@ -18,6 +18,8 @@
             <option value="$PROJECT_DIR$/coroutine_lsn2" />
             <option value="$PROJECT_DIR$/flow_lsn3" />
             <option value="$PROJECT_DIR$/lib_base" />
+            <option value="$PROJECT_DIR$/paging_lsn5" />
+            <option value="$PROJECT_DIR$/project_end" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
