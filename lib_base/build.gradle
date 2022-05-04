@@ -77,14 +77,16 @@ dependencies {
     api 'org.jetbrains.kotlin:kotlin-reflect:1.6.20'
 
 
-    //lifecycle - https://developer.android.google.cn/jetpack/androidx/releases/lifecycle
     def lifecycle_version = "2.4.1"
+    //lifecycle - https://developer.android.google.cn/jetpack/androidx/releases/lifecycle
     //lifecycleScope
     api "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
     //viewModelScope
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
     api "androidx.lifecycle:lifecycle-livedata-core-ktx:$lifecycle_version"
     api "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
 
     def retrofit_version = "2.9.0"
     api "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -103,36 +105,52 @@ dependencies {
     api 'com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0'
 
 
-    //navigation - https://developer.android.google.cn/jetpack/androidx/releases/navigation
     def navigation_version = "2.4.2"
+    //navigation - https://developer.android.google.cn/jetpack/androidx/releases/navigation
     api "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     api "androidx.navigation:navigation-ui-ktx:$navigation_version"
     // Feature module Support
     api "androidx.navigation:navigation-dynamic-features-fragment:$navigation_version"
 
 
-    //room - https://developer.android.google.cn/jetpack/androidx/releases/room
     def room_version = "2.4.2"
+    //room - https://developer.android.google.cn/jetpack/androidx/releases/room
     api "androidx.room:room-ktx:$room_version"
     api "androidx.room:room-runtime:$room_version"
+    api "androidx.room:room-paging:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    //paging - https://developer.android.google.cn/jetpack/androidx/releases/paging
+
     def paging_version = "3.1.1"
+    //paging - https://developer.android.google.cn/jetpack/androidx/releases/paging
     api "androidx.paging:paging-runtime:$paging_version"
     // alternatively - without Android dependencies for tests
     testImplementation "androidx.paging:paging-common:$paging_version"
     // optional - RxJava2 support
     api "androidx.paging:paging-rxjava2:$paging_version"
 
+
     //所有使用到的模块都要加上这两个依赖
-    def hilt_version = "2.28-alpha"
+    def hilt_version = "2.41" //"2.28-alpha"
     api "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
-
-    def hilt_view_version = "1.0.0-alpha01"
+    def hilt_view_version = "1.0.0"
     //使用 Hilt 注入 ViewModel 对象
-    api "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_view_version"
+//    api "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_view_version" //废弃
+    api "androidx.hilt:hilt-work:$hilt_view_version"
     kapt "androidx.hilt:hilt-compiler:$hilt_view_version"
+
+
+    def coil_version="2.0.0-rc03"
+    //https://coil-kt.github.io/coil/
+    api "io.coil-kt:coil:$coil_version"
+    api "io.coil-kt:coil-gif:$coil_version"
+    api "io.coil-kt:coil-svg:$coil_version"
+    api "io.coil-kt:coil-video:$coil_version"
+    api "io.coil-kt:coil-bom:$coil_version"
 }
+
+//kapt {
+//    correctErrorTypes true
+//}

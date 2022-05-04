@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import com.jetpacket.paging.databinding.LayoutLoadMoreBinding
-import com.jetpacket.paging.util.BindingViewModel
+import com.zs.coroutines.lib.base.util.BaseBindingViewHolder
 
 /**
  * @author zhangshuai
@@ -14,15 +14,18 @@ import com.jetpacket.paging.util.BindingViewModel
  * @email zhangshuai@dushu365.com
  * @description 加载更多
  */
-class LoadMoreAdapter(private val context: Context) : LoadStateAdapter<BindingViewModel>() {
+class LoadMoreAdapter(private val context: Context) : LoadStateAdapter<BaseBindingViewHolder>() {
 
-    override fun onBindViewHolder(holder: BindingViewModel, loadState: LoadState) {
-        val binding=holder.binding as LayoutLoadMoreBinding
+    override fun onBindViewHolder(holder: BaseBindingViewHolder, loadState: LoadState) {
+        val binding = holder.binding as LayoutLoadMoreBinding
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): BindingViewModel {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        loadState: LoadState
+    ): BaseBindingViewHolder {
         val binding = LayoutLoadMoreBinding.inflate(LayoutInflater.from(context), parent, false)
-        return BindingViewModel(binding)
+        return BaseBindingViewHolder(binding)
     }
 
 }

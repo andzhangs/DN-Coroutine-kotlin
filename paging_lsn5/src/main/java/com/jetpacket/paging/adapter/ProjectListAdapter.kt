@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 import com.jetpacket.paging.databinding.LayoutProjectListItemBinding
 import com.jetpacket.paging.model.DataX
-import com.jetpacket.paging.util.BindingViewModel
+import com.zs.coroutines.lib.base.util.BaseBindingViewHolder
 
 /**
  * @author zhangshuai
@@ -18,7 +16,7 @@ import com.jetpacket.paging.util.BindingViewModel
  * @description
  */
 class ProjectListAdapter(private val context: Context) :
-    PagingDataAdapter<DataX, BindingViewModel>(object :
+    PagingDataAdapter<DataX, BaseBindingViewHolder>(object :
         DiffUtil.ItemCallback<DataX>() {
 
         override fun areItemsTheSame(oldItem: DataX, newItem: DataX): Boolean =
@@ -29,14 +27,14 @@ class ProjectListAdapter(private val context: Context) :
 
     }) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewModel {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseBindingViewHolder {
         val itemViewBinding =
             LayoutProjectListItemBinding.inflate(LayoutInflater.from(context), parent, false)
-        return BindingViewModel(itemViewBinding)
+        return BaseBindingViewHolder(itemViewBinding)
     }
 
 
-    override fun onBindViewHolder(holder: BindingViewModel, position: Int) {
+    override fun onBindViewHolder(holder: BaseBindingViewHolder, position: Int) {
         val data = getItem(position)
         data?.let {
             val binding = holder.binding as LayoutProjectListItemBinding

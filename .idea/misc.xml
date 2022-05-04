@@ -17,6 +17,9 @@
         <entry key="jetpacket_paging_lsn5/src/main/res/layout/layout_item.xml" value="0.1" />
         <entry key="jetpacket_paging_lsn5/src/main/res/layout/layout_load_more.xml" value="0.1767983789260385" />
         <entry key="jetpacket_paging_lsn5/src/main/res/layout/layout_project_list_item.xml" value="0.20833333333333334" />
+        <entry key="project_end/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="project_end/src/main/res/layout/layout_load_more_view.xml" value="0.14412360688956433" />
+        <entry key="project_end/src/main/res/layout/layout_project_list_item.xml" value="0.1" />
       </map>
     </option>
   </component>

@@ -5,9 +5,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
 import com.dn.coroutine.databinding.LayoutUserListItemBinding
 import com.dn.coroutine.room.model.User
+import com.zs.coroutines.lib.base.util.BaseBindingViewHolder
 
 /**
  * @author zhangshuai
@@ -16,7 +16,7 @@ import com.dn.coroutine.room.model.User
  * @description
  */
 open class UserListAdapter(private val context: Context) :
-    RecyclerView.Adapter<UserListAdapter.Companion.ItemViewModel>() {
+    RecyclerView.Adapter<BaseBindingViewHolder>() {
 
     private val mList = ArrayList<User>()
 
@@ -27,12 +27,8 @@ open class UserListAdapter(private val context: Context) :
         notifyDataSetChanged()
     }
 
-    companion object {
-        class ItemViewModel(val binding: ViewBinding) : RecyclerView.ViewHolder(binding.root) {}
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewModel {
-        return ItemViewModel(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseBindingViewHolder {
+        return BaseBindingViewHolder(
             LayoutUserListItemBinding.inflate(
                 LayoutInflater.from(context),
                 parent,
@@ -41,7 +37,7 @@ open class UserListAdapter(private val context: Context) :
         )
     }
 
-    override fun onBindViewHolder(holder: ItemViewModel, position: Int) {
+    override fun onBindViewHolder(holder: BaseBindingViewHolder, position: Int) {
         val data = mList[position]
         (holder.binding as LayoutUserListItemBinding).apply {
             itemAcTvUserId.text = data.userId.toString()

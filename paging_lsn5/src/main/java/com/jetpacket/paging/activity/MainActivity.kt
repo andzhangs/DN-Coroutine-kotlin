@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         //刷新
         mBinding.swipeRefreshLayout.setOnRefreshListener {
-            projectAdapter.retry()
+//            projectAdapter.retry()
             projectAdapter.refresh()
         }
     }

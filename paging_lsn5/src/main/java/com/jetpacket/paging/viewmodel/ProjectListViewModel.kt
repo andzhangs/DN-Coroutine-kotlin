@@ -7,11 +7,11 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.jetpacket.paging.http.BaseResponse
-import com.jetpacket.paging.model.Data
 import com.jetpacket.paging.model.DataX
 import com.jetpacket.paging.paging.ProjectListPagingSource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 
 /**
  * @author zhangshuai
@@ -32,7 +32,9 @@ class ProjectListViewModel : ViewModel() {
                 prefetchDistance = 1
             ), //第一次加载两页，后续加载一页
             pagingSourceFactory = { ProjectListPagingSource() }
-        ).flow.cachedIn(viewModelScope)
+        ).flow
+            .cachedIn(viewModelScope)
+            .flowOn(Dispatchers.IO)
     }
 
     /**

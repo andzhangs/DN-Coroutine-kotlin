@@ -15,5 +15,6 @@ import kotlinx.serialization.json.Json
 data class ResponseResult(val userName: String)
 
 fun main() {
-    Json.encodeToString(ResponseResult("str"))
+    val result=Json.encodeToString(ResponseResult("str"))
+    println("打印result：$result")
 }
