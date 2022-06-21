@@ -1,4 +1,4 @@
-package com.zs.coroutine.api.data
+package com.channel.lsn4.api.data
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

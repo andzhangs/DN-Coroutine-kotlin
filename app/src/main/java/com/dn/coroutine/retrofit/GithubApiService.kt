@@ -20,7 +20,7 @@ import retrofit2.http.Query
 val instance: GithubApiService by lazy {
     Retrofit.Builder().client(OkHttpClient.Builder().addInterceptor {
         it.proceed(it.request()).apply {
-            Log.i("print_logs", "requestCode：${code()}, ${request()}")
+            Log.i("print_logs", "requestCode：$code, $request")
         }
     }.build())
         .baseUrl("https://cn.bing.com/")
