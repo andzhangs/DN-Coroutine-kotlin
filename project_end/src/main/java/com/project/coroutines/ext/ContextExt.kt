@@ -6,7 +6,6 @@ import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 import android.os.Build
 import android.util.Log
-import com.project.coroutines.BuildConfig
 
 /**
  * @author zhangshuai
