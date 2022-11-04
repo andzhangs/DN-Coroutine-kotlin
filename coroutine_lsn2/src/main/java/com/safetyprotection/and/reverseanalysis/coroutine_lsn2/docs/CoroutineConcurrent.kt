@@ -105,8 +105,8 @@ object CoroutineConcurrent {
      * 避免并发
      */
     fun accessOuterVariable() = runBlocking {
-        var count = 0
-        var result=count + List(1000) {
+        val count = 0
+        val result=count + List(1000) {
             GlobalScope.async { 1 }  //1000个1相加
         }.sumOf { it.await() }
 

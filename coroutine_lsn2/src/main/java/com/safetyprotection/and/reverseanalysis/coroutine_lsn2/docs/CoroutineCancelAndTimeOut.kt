@@ -1,6 +1,5 @@
 package com.safetyprotection.and.reverseanalysis.coroutine_lsn2.docs
 
-import android.util.Log
 import kotlinx.coroutines.*
 
 /**
@@ -211,7 +210,7 @@ class CoroutineCancelAndTimeOut {
             }
             parentJob.join()
         }
-        //1、第二个子协程先抛异常；2、第一个子协程也会被取消；3、父协程等所哟子协程处理完毕后，再抛异常
+        //1、第二个子协程先抛异常；2、第一个子协程也会被取消；3、父协程等所有子协程处理完毕后，再抛异常
         private fun CancelAndException2() = runBlocking {
             val handlerException=CoroutineExceptionHandler(){_,e->
                 println("父协程捕获异常: $e")

@@ -2,18 +2,19 @@ package com.zs.coroutine.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.zs.coroutine.api.UserServiceApi
-import com.zs.coroutine.api.userServiceApi
 import com.zs.coroutine.api.data.UserDataModel
+import com.zs.coroutine.api.userServiceApi
 import com.zs.coroutine.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
 import kotlin.coroutines.*
 
-class MainActivity : AppCompatActivity() ,CoroutineScope by MainScope(){
+class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private lateinit var mBinding: ActivityMainBinding
 
@@ -47,16 +48,24 @@ class MainActivity : AppCompatActivity() ,CoroutineScope by MainScope(){
 //                Log.i("print_logs", "MainActivity::onCreate: $result")
 //            }
 
+
+        //GlobalScope默认是在非UI线程
+        GlobalScope.launch {
+            Log.i("print_logs", "MainActivity::请求线程-1: ${Thread.currentThread()}")
+            val result =userServiceApi.getUserDataModel(UserServiceApi.USER_NAME)
+            Log.i("print_logs", "MainActivity::onCreate:结果： $result")
+            withContext(Dispatchers.Main){
+                Toast.makeText(this@MainActivity, "访问成功：${result.name}", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         //协程让异步逻辑同步化
         //协程核心点：函数或者一段程序能够被挂起，，稍后再在挂起的位置恢复
-        CoroutineScope(Dispatchers.Main).launch {
-            Log.i("print_logs", "MainActivity::请求线程-1: ${Thread.currentThread()}")
-            val result = withContext(Dispatchers.IO) {
-                Log.i("print_logs", "MainActivity::请求线程-2: ${Thread.currentThread()}")
-                userServiceApi.getUserDataModel(UserServiceApi.USER_NAME)
-            }
-            Log.i("print_logs", "MainActivity::onCreate:结果： $result")
-        }
+//        CoroutineScope(Dispatchers.Main).launch {
+//            Log.i("print_logs", "MainActivity::请求线程-1: ${Thread.currentThread()}")
+//            val result =userServiceApi.getUserDataModel(UserServiceApi.USER_NAME)
+//            Log.i("print_logs", "MainActivity::onCreate:结果： $result")
+//        }
     }
 
     /**
@@ -202,7 +211,7 @@ class MainActivity : AppCompatActivity() ,CoroutineScope by MainScope(){
 ////                Log.e("print_logs", "MainActivity::click6: 协程取消")
 ////            }
 //        }
-        //方式二：当前类继承 CoroutineScope by MainScope()，见15行
+        //方式二：当前类继承 CoroutineScope by MainScope()，见17行
         launch {
             val result = userServiceApi.getUserDataModel(UserServiceApi.USER_NAME)
             Log.i("print_logs", "MainActivity::click6: $result")
@@ -223,7 +232,7 @@ class MainActivity : AppCompatActivity() ,CoroutineScope by MainScope(){
      * ---------------------------------------------------------------------------------------------
      */
     fun click7(view: View) {
-        startActivity(Intent(this,MainActivity2::class.java))
+        startActivity(Intent(this, MainActivity2::class.java))
     }
 
 }

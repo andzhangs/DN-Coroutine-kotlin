@@ -1,7 +1,5 @@
 package com.dn.coroutine.closeable
 
-import java.lang.Exception
-
 /**
  * @Author zhangshuai
  * @Date 2022/2/9
@@ -13,11 +11,11 @@ class TestAutoCloseable {
     class MyResource : AutoCloseable {
 
         fun doSomeThing() {
-            println("TestAutoCloseable->MyResource：doSomeThing『做任何操作』")
+            println("TestAutoCloseable->MyResource：doSomeThing")
         }
 
         override fun close() {
-            println("TestAutoCloseable->MyResource：close『做任何操作』")
+            println("TestAutoCloseable->MyResource：close")
         }
 
     }
@@ -38,11 +36,13 @@ class TestAutoCloseable {
             }
 
             //lambda表达式
-            fun hello(): () -> Unit ={
+            fun hello(): () -> String ={
                 println("hello ,world")
+                "I'm a return value!"
             }
             //调用
-            hello().invoke()
+            val result=hello().invoke()
+            println("result = $result")
         }
 
 

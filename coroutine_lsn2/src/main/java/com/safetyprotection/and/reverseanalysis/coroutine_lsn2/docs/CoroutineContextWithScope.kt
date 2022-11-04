@@ -1,7 +1,6 @@
 package com.safetyprotection.and.reverseanalysis.coroutine_lsn2.docs
 
 import kotlinx.coroutines.*
-import java.lang.IllegalArgumentException
 
 /**
  * @Author zhangshuai
@@ -137,7 +136,8 @@ class CoroutineContextWithScope {
             val job=scope.launch(Dispatchers.IO) {
                 println("新协程：${Thread.currentThread().name}")
             }
-
+            job.start()
+            job.join()
         }
 
 
@@ -193,9 +193,6 @@ class CoroutineContextWithScope {
 
         private class Activity {
             private val mainScope = CoroutineScope(Dispatchers.Default)
-            fun destory() {
-                mainScope.cancel()
-            }
 
             fun doSomeThing() {
                 //启动了 10 个协程，且每个都工作了不同的时长
@@ -205,6 +202,10 @@ class CoroutineContextWithScope {
                         println("Coroutine $i is done，${System.currentTimeMillis()}，${Thread.currentThread().name}")
                     }
                 }
+            }
+
+            fun destory() {
+                mainScope.cancel()
             }
         }
     }
