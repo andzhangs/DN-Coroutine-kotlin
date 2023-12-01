@@ -1,5 +1,7 @@
 package com.dn.coroutine.closeable
 
+import android.annotation.SuppressLint
+
 /**
  * @Author zhangshuai
  * @Date 2022/2/9
@@ -8,6 +10,7 @@ package com.dn.coroutine.closeable
  */
 class TestAutoCloseable {
 
+    @SuppressLint("NewApi")
     class MyResource : AutoCloseable {
 
         fun doSomeThing() {

@@ -1,6 +1,13 @@
 package com.zs.coroutine
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
+
 /**
  * @Author zhangshuai
  * @Date 2021/9/5
@@ -13,6 +20,12 @@ class FirstCoroutines {
         fun main(args: Array<String>) = runBlocking {
             //runBlocking 阻塞当前线程来等待。是常规函数
             launch {
+                showDialog("1....")
+                showDialog("2....")
+                showDialog("3....")
+                showDialog("4....")
+
+
                 println("Task from runBlocking launch -> before")
                 delay(1000L)
                 println("2-Task from runBlocking launch")
@@ -29,9 +42,18 @@ class FirstCoroutines {
             println("4-Coroutine Scope is over")
         }
 
-        private suspend fun doWork(){
+        private suspend fun doWork() {
             delay(2000L)
             println("3-Task from nested launch")
+        }
+
+        private suspend fun showDialog(str: String) = suspendCancellableCoroutine<Unit> {
+            println("showDialog：$str")
+            it.resume(Unit)
+        }
+
+        private suspend fun show()= suspendCoroutine<Unit> {
+            it.resume(Unit)
         }
     }
 }

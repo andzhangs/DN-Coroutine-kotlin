@@ -12,6 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.dn.coroutine"
+
         minSdk 21
         targetSdk 30
         versionCode 1
@@ -54,7 +55,7 @@ android {
     externalNativeBuild {
         cmake {
             path file('src/main/cpp/CMakeLists.txt')
-            version '3.10.2'
+            version '3.22.1'
         }
     }
     buildFeatures {
@@ -64,7 +65,7 @@ android {
         includeInApk true
         includeInBundle true
     }
-    ndkVersion '21.4.7075529'
+    ndkVersion '25.2.9519653'
 
 }
 

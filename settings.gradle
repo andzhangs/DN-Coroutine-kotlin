@@ -1,17 +1,53 @@
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+//dependencyResolutionManagement {
+//    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+//    repositories {
+//        mavenCentral()
+//        maven { url 'https://mvnrepository.com/artifact/com.github.gundy/semver4j' }
+//        maven { url 'https://jitpack.io' }
+//        maven { url 'https://maven.aliyun.com/repository/public' }
+//        maven { url 'https://maven.aliyun.com/repository/central' }
+//        maven { url 'https://maven.aliyun.com/repository/google' }
+//        maven { url 'https://maven.aliyun.com/repository/public' }
+//        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+//        google()
+//        jcenter() // Warning: this repository is going to shut down soon
+//    }
+//}
+
+pluginManagement {
     repositories {
-        mavenCentral()
-        maven { url 'https://jitpack.io' }
+        maven {url 'https://mvnrepository.com/artifact/com.github.gundy/semver4j'}
+//        maven { url 'https://jitpack.io' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/central' }
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+
+        gradlePluginPortal()
         google()
-        jcenter() // Warning: this repository is going to shut down soon
+        mavenCentral()
+
     }
 }
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        maven {url 'https://mvnrepository.com/artifact/com.github.gundy/semver4j'}
+//        maven { url 'https://jitpack.io' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/central' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/public' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+
+    }
+}
+
 rootProject.name = "DongNaoCoroutine-kotlin"
 include ':app'
 include ':coroutine_lsn1'

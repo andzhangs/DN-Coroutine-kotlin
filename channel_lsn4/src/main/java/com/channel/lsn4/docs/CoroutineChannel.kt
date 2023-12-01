@@ -1,15 +1,32 @@
 package com.channel.lsn4.docs
 
+import com.channel.lsn4.api.data.UserDataModel
 import com.google.gson.Gson
 import com.zs.coroutine.api.UserServiceApi
-import com.channel.lsn4.api.data.UserDataModel
 import com.zs.coroutine.api.userServiceApi
-import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.async
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.SendChannel
+import kotlinx.coroutines.channels.actor
+import kotlinx.coroutines.channels.broadcast
+import kotlinx.coroutines.channels.produce
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.joinAll
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.selects.select
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 /**
  * @author zhangshuai
@@ -70,17 +87,17 @@ object CoroutineChannel {
 
     @JvmStatic
     fun main(args: Array<String>) {
-//        first()
-//        second()
-//        channelIterator()
-//        produceReceiveChannel()
-//        actorSendChannel()
-//        closeChannel()
-//        broadcastChannel()
-//        multiplexingSelectOnAwait()
-//        multiplexingChannel()
-//        selectClause0()
-//        selectClause2()
+        first()
+        second()
+        channelIterator()
+        produceReceiveChannel()
+        actorSendChannel()
+        closeChannel()
+        broadcastChannel()
+        multiplexingSelectOnAwait()
+        multiplexingChannel()
+        selectClause0()
+        selectClause2()
 //        multiplexingFlow()
     }
 
@@ -189,6 +206,7 @@ object CoroutineChannel {
                 println("<-接收：${i}")
             }
         }
+
         consumer.join()
     }
 
@@ -407,18 +425,19 @@ object CoroutineChannel {
      * 多路复用-Flow
      */
     fun multiplexingFlow() = runBlocking {
-        //函数->协程->Flow->合并Flow
+        //函数->协程->Flow->Flow合并
 //        coroutineScope {
 //            withContext(Dispatchers.IO) {
+                 ////通过作用域，将对应方法调用添加至list集合里
 //                listOf(::getDataFromLocal, ::getDataFromRemote)
+                 ////遍历集合每个方法，function 就为对应的某个方法
 //                    .map { function ->
-//                        withContext(Dispatchers.IO) {
-//                            function.call(UserServiceApi.USER_NAME)
-//                        }
-//                    }.map {
-//                        flow { emit(it.await()) }
-//                    }.merge()
-//                    .collect {
+                        ////这里调用对应方法后，将返回的结果传至下个map里
+//                        function.call(UserServiceApi.USER_NAME)
+//                    }.map {  //这里对应deferred 表示对应方法返回的结果
+//                        flow { emit(it.await()) }  //这里表示，得到谁，就通过flow 发射值
+//                    }.merge()  //流 合并
+//                    .collect {  //这里只管接收flow对应发射值
 //                        println("打印：$it")
 //                    }
 //            }
