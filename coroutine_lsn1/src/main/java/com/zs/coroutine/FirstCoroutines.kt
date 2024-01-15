@@ -25,6 +25,7 @@ class FirstCoroutines {
                 showDialog("3....")
                 showDialog("4....")
 
+                show()
 
                 println("Task from runBlocking launch -> before")
                 delay(1000L)
@@ -53,6 +54,7 @@ class FirstCoroutines {
         }
 
         private suspend fun show()= suspendCoroutine<Unit> {
+            println("show()")
             it.resume(Unit)
         }
     }

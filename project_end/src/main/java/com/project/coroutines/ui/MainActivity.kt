@@ -1,17 +1,20 @@
 package com.project.coroutines.ui
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.project.coroutines.databinding.ActivityMainBinding
 import com.project.coroutines.databinding.LayoutProjectListItemBinding
 import com.project.coroutines.model.ProjectItemModel
@@ -37,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         with(mBinding.recyclerView) {
             adapter = mAdapter.withLoadStateFooter(LoadMoreViewAdapter(this@MainActivity, mAdapter))
-            layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
+            layoutManager = StaggeredGridLayoutManager(3, RecyclerView.VERTICAL)
             addItemDecoration(
                 DividerItemDecoration(
                     this@MainActivity,

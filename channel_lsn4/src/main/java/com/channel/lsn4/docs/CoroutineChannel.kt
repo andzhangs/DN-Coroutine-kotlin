@@ -321,13 +321,11 @@ object CoroutineChannel {
                 .let { Gson().fromJson(it, UserDataModel::class.java) }
         }
 
-
     //模拟网络请求数据
     fun CoroutineScope.getDataFromRemote(username: String = UserServiceApi.USER_NAME) =
         async(Dispatchers.IO) {
             userServiceApi.getUserDataModel(username)
         }
-
 
     fun multiplexingSelectOnAwait() = runBlocking {
         //通过延迟本地时间模拟
