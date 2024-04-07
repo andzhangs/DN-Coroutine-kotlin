@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         setContentView(mBinding.root)
     }
 
+
     /**
      *                                      优美的分割线
      * ---------------------------------------------------------------------------------------------

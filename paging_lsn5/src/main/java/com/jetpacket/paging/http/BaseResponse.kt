@@ -6,6 +6,7 @@ package com.jetpacket.paging.http
  * @email zhangshuai@dushu365.com
  * @description
  */
+@kotlinx.serialization.Serializable
 class BaseResponse<T> {
     var data: T? = null
     var errorCode: Int = 0

@@ -4,11 +4,8 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.jetpacket.paging.api.ApiService
-import com.jetpacket.paging.http.BaseResponse
 import com.jetpacket.paging.http.RetrofitClient
-import com.jetpacket.paging.model.Data
 import com.jetpacket.paging.model.DataX
-import kotlinx.coroutines.delay
 
 /**
  * @author zhangshuai
@@ -54,7 +51,7 @@ class ProjectListPagingSource : PagingSource<Int, DataX>() {
             )
         } catch (e: Exception) {
             e.printStackTrace()
-            return LoadResult.Error(e)
+            LoadResult.Error(e)
         }
     }
 

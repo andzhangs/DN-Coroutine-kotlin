@@ -16,10 +16,6 @@ import com.zs.coroutines.lib.base.util.BaseBindingViewHolder
  */
 class LoadMoreAdapter(private val context: Context) : LoadStateAdapter<BaseBindingViewHolder>() {
 
-    override fun onBindViewHolder(holder: BaseBindingViewHolder, loadState: LoadState) {
-        val binding = holder.binding as LayoutLoadMoreBinding
-    }
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         loadState: LoadState
@@ -28,4 +24,7 @@ class LoadMoreAdapter(private val context: Context) : LoadStateAdapter<BaseBindi
         return BaseBindingViewHolder(binding)
     }
 
+    override fun onBindViewHolder(holder: BaseBindingViewHolder, loadState: LoadState) {
+        val binding = holder.binding as LayoutLoadMoreBinding
+    }
 }
