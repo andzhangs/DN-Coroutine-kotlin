@@ -12,6 +12,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
  */
 class StateFlowViewModel : ViewModel() {
 
+    init {
+        Log.i("print_logs", "StateFlowViewModel::")
+    }
+
+
     /**
      * StateFlow是一个状态容器式可观察数据流，可以向其收集器发出当前状态更新，和新状态更新。
      * 还可以通过其value属性读取当前状态值
@@ -31,9 +36,5 @@ class StateFlowViewModel : ViewModel() {
                 number.value = 0
             }
         }
-    }
-
-    init {
-        Log.i("print_logs", "StateFlowViewModel::")
     }
 }
