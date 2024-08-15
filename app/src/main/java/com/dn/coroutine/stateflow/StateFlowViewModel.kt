@@ -36,7 +36,4 @@ class StateFlowViewModel : ViewModel() {
     init {
         Log.i("print_logs", "StateFlowViewModel::")
     }
-
-
-
 }
