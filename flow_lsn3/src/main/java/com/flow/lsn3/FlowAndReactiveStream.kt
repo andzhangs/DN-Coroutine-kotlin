@@ -76,7 +76,7 @@ object FlowAndReactiveStream {
             Thread.sleep(100) //模拟计算
 //            println("simple2= ${System.currentTimeMillis()}")
             yield(i)
-            //relay 是挂起协程并经过执行时间恢复协程，当线程空闲时就会运行协程
+            //relay 是挂起协程，并经过执行时间恢复协程，当线程空闲时就会运行协程
             //yield 是挂起协程，让协程放弃本次 cpu 执行机会让给别的协程，当线程空闲时再次运行协程。
         }
     }

@@ -224,6 +224,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     override fun onDestroy() {
         super.onDestroy()
         mainScope.cancel()
+        cancel()
     }
 
     /**

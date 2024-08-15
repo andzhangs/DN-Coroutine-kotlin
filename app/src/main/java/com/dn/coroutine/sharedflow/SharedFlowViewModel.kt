@@ -21,7 +21,6 @@ class SharedFlowViewModel : ViewModel() {
      * 2、StateFlow有默认值，且只保留最新的一个值
      */
 
-
     private lateinit var job: Job
 
     fun start() {
