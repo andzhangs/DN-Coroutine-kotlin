@@ -6,10 +6,10 @@ package com.dn.coroutine.closeable;
  * @Emial zhangshuai@dushu365.com
  * @Description 方式一、打开.idea文件夹中的gradle.xml文件，新增标签：<option name="delegatedBuild" value="false" />
  */
-public class TestAutoCloseable2 {
+public class AutoCloseableJava {
 
     public static void main(String[] args) {
-        try (TestAutoCloseable.MyResource mr = new TestAutoCloseable.MyResource()) {
+        try (AutoCloseableKotlin.MyResource mr = new AutoCloseableKotlin.MyResource()) {
             mr.doSomeThing();
         } catch (Exception e) {
             e.printStackTrace();

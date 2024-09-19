@@ -8,7 +8,7 @@ import android.annotation.SuppressLint
  * @Emial zhangshuai@dushu365.com
  * @Description
  */
-class TestAutoCloseable {
+class AutoCloseableKotlin {
 
     @SuppressLint("NewApi")
     class MyResource : AutoCloseable {

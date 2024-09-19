@@ -4,7 +4,12 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.dn.coroutine.databinding.ActivityMainBinding
+import kotlinx.coroutines.channels.BroadcastChannel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.launch
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.TimeUnit
 
@@ -17,21 +22,45 @@ class MainActivity : AppCompatActivity() {
             System.loadLibrary("coroutine")
         }
     }
-    private val binding: ActivityMainBinding by lazy{ ActivityMainBinding.inflate(layoutInflater) }
+
+    private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
+    private val mBroadcastChannel: BroadcastChannel<String> = BroadcastChannel(Channel.BUFFERED)
+    private val receiver1 = mBroadcastChannel.openSubscription()
+    private val receiver2 = mBroadcastChannel.openSubscription()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        
-        var i=10
-        val n=++i%5
+
+        lifecycleScope.launch {
+            receiver1.consumeEach {
+                Log.i("print_logs", "receiver1-接收: $it")
+            }
+        }
+        lifecycleScope.launch {
+            receiver2.consumeEach {
+                Log.i("print_logs", "receiver2-接收: $it")
+            }
+        }
+
+        binding.acBtnClick.setOnClickListener {
+            lifecycleScope.launch {
+                mBroadcastChannel.send("发射：${System.currentTimeMillis()}")
+            }
+        }
+
+
+
+        var i = 10
+        val n = ++i % 5
 
         Log.i("print_logs", "MainActivity::onCreate: i= $i, n= $n")
 
-        val m=456
-        val a=m%10
-        val b=m/10
-        val c=(m-m/100*100)%10
+        val m = 456
+        val a = m % 10
+        val b = m / 10
+        val c = (m - m / 100 * 100) % 10
         Log.i("print_logs", "MainActivity::onCreate: a=$a, b=$b, c=$c")
     }
 
@@ -112,5 +141,10 @@ class MainActivity : AppCompatActivity() {
             }
             Log.e("print_logs", "handler：异常结果: ${handle.get()}")
         }
+    }
+
+    override fun onDestroy() {
+        mBroadcastChannel.close(Throwable("主动关闭"))
+        super.onDestroy()
     }
 }

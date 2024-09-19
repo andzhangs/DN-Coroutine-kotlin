@@ -28,36 +28,43 @@ object DownloadManager {
     fun download(url: String, file: File): Flow<DownloadStatus> {
         return flow {
             val request = Request.Builder().url(url).get().build()
-            val response = OkHttpClient.Builder().build().newCall(request).execute()
+            val newCall = OkHttpClient.Builder().build().newCall(request)
+            val response = newCall.execute()
             if (response.isSuccessful) {
                 response.body!!.let { body ->
                     val total = body.contentLength()
-                    Log.i("print_logs", "DownloadManager::download::total: $total")
+                    Log.i("print_logs", "total: $total")
                     //文件读写操作
                     file.outputStream().use { output ->
                         val input = body.byteStream()
                         var emittedProgress = 0L
                         input.copyTo(output) { bytesCopied ->
-                            Log.i("print_logs", "DownloadManager::download::bytesCopied: $bytesCopied")
-
+                            Log.i("print_logs", "bytesCopied: $bytesCopied")
                             val process = bytesCopied / total * 100
                             if (process - emittedProgress > 5) { //每5个进度发一次
                                 kotlinx.coroutines.delay(100L) //模拟延时/数据大等情况
                                 emit(DownloadStatus.Progress(process.toInt()))
                                 emittedProgress = process
                             }
+
+//                            if (bytesCopied >= 10000){  //手动停止
+//                                newCall.cancel()
+//                                Log.e("print_logs", "DownloadManager::download: 取消下载")
+//                            }
                         }
                     }
                 }
                 emit(DownloadStatus.Done(file))
             }else{
-                throw IOException(response.toString())
+                val e = IOException(response.toString())
+                emit(DownloadStatus.Error(e))
+                throw e
             }
+
         }.catch {
             file.delete()
             emit(DownloadStatus.Error(it))
         }.flowOn(Dispatchers.IO)
-
     }
 
 }
