@@ -13,15 +13,16 @@ import com.zs.coroutines.lib.base.util.BaseBindingViewHolder
  * @date 2024/11/25 15:06
  * @description 自定义类描述
  */
-class BaseDataBindingViewHolder<VB : ViewDataBinding>(private val db: VB) :
-    BaseBindingViewHolder(db) {
+open class DataBindingViewHolder<VB : ViewDataBinding>(private val mDataBinding: VB) :
+    BaseBindingViewHolder(mDataBinding) {
+
     companion object {
         @JvmStatic
-        fun <VB : ViewDataBinding> createInstance(
+        fun <VB : ViewDataBinding> create(
             @LayoutRes layoutRes: Int,
             viewGroup: ViewGroup,
             attachToRoot: Boolean = false
-        ): BaseDataBindingViewHolder<VB> {
+        ): DataBindingViewHolder<VB> {
 
             val db = DataBindingUtil.inflate<VB>(
                 LayoutInflater.from(viewGroup.context),
@@ -30,9 +31,9 @@ class BaseDataBindingViewHolder<VB : ViewDataBinding>(private val db: VB) :
                 attachToRoot
             )
 
-            return BaseDataBindingViewHolder(db)
+            return DataBindingViewHolder(db)
         }
     }
 
-    val mBinding by lazy { db }
+    val mBinding by lazy { mDataBinding }
 }
