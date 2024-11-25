@@ -41,6 +41,5 @@ class ProjectListAdapter(private val context: Context) :
             binding.data = it
             binding.networkImage = it.envelopePic
         }
-
     }
 }

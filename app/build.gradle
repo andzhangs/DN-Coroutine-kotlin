@@ -71,7 +71,6 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation project(":lib_base")
     kapt 'androidx.room:room-compiler:2.5.2'
 }

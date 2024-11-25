@@ -3,18 +3,17 @@ package com.dn.coroutine.fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.dn.coroutine.databinding.FragmentRetrofitBinding
 import com.dn.coroutine.retrofit.RetrofitViewModel
-import io.reactivex.disposables.Disposable
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
@@ -25,8 +24,6 @@ class RetrofitFragment : Fragment() {
     private val mBinding by lazy { FragmentRetrofitBinding.inflate(layoutInflater) }
 
     private val mViewModel by viewModels<RetrofitViewModel>()
-
-    private lateinit var mDisposable: Disposable
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,10 +82,5 @@ class RetrofitFragment : Fragment() {
         addTextChangedListener(textWatchListener)
         //注：移除监听
         awaitClose { removeTextChangedListener(textWatchListener) }
-    }
-
-    override fun onDestroy() {
-        mDisposable.dispose()
-        super.onDestroy()
     }
 }

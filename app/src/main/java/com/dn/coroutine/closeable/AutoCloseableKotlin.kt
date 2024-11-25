@@ -47,7 +47,5 @@ class AutoCloseableKotlin {
             val result=hello().invoke()
             println("result = $result")
         }
-
-
     }
 }
