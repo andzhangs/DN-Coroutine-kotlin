@@ -15,7 +15,6 @@ import com.jetpacket.paging.adapter.LoadMoreAdapter
 import com.jetpacket.paging.adapter.ProjectListAdapter
 import com.jetpacket.paging.databinding.ActivityMainBinding
 import com.jetpacket.paging.viewmodel.ProjectListViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        val projectAdapter = ProjectListAdapter(this)
+        val projectAdapter = ProjectListAdapter()
         mBinding.recyclerview.apply {
             //设置适配器，并自定义加载更多
             adapter = projectAdapter.withLoadStateFooter(LoadMoreAdapter(this@MainActivity))

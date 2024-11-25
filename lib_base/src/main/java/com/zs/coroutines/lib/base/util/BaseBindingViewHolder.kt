@@ -9,9 +9,4 @@ import androidx.viewbinding.ViewBinding
  * @email zhangshuai@dushu365.com
  * @description
  */
-class BaseBindingViewHolder(
-    val binding: ViewBinding
-) : RecyclerView.ViewHolder(binding.root) {
-
-
-}
+open class BaseBindingViewHolder(val binding: ViewBinding) : RecyclerView.ViewHolder(binding.root)

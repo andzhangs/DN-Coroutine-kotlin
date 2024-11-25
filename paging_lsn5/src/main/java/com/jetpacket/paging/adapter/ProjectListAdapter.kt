@@ -1,13 +1,12 @@
 package com.jetpacket.paging.adapter
 
-import android.content.Context
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.jetpacket.paging.R
+import com.jetpacket.paging.base.BaseDataBindingViewHolder
 import com.jetpacket.paging.databinding.LayoutProjectListItemBinding
 import com.jetpacket.paging.model.DataX
-import com.zs.coroutines.lib.base.util.BaseBindingViewHolder
 
 /**
  * @author zhangshuai
@@ -15,8 +14,8 @@ import com.zs.coroutines.lib.base.util.BaseBindingViewHolder
  * @email zhangshuai@dushu365.com
  * @description
  */
-class ProjectListAdapter(private val context: Context) :
-    PagingDataAdapter<DataX, BaseBindingViewHolder>(object :
+class ProjectListAdapter() :
+    PagingDataAdapter<DataX, BaseDataBindingViewHolder<LayoutProjectListItemBinding>>(object :
         DiffUtil.ItemCallback<DataX>() {
 
         override fun areItemsTheSame(oldItem: DataX, newItem: DataX): Boolean =
@@ -27,17 +26,16 @@ class ProjectListAdapter(private val context: Context) :
 
     }) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseBindingViewHolder {
-        val itemViewBinding =
-            LayoutProjectListItemBinding.inflate(LayoutInflater.from(context), parent, false)
-        return BaseBindingViewHolder(itemViewBinding)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseDataBindingViewHolder<LayoutProjectListItemBinding> {
+//        val itemViewBinding = LayoutProjectListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return BaseDataBindingViewHolder.createInstance(R.layout.layout_project_list_item, parent)
     }
 
 
-    override fun onBindViewHolder(holder: BaseBindingViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BaseDataBindingViewHolder<LayoutProjectListItemBinding>, position: Int) {
         val data = getItem(position)
         data?.let {
-            val binding = holder.binding as LayoutProjectListItemBinding
+            val binding = holder.mBinding
             binding.data = it
             binding.networkImage = it.envelopePic
         }
