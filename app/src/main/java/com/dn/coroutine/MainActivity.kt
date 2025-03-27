@@ -6,10 +6,12 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.dn.coroutine.databinding.ActivityMainBinding
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.runInterruptible
+import kotlinx.coroutines.withTimeoutOrNull
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.TimeUnit
 
@@ -25,32 +27,10 @@ class MainActivity : AppCompatActivity() {
 
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
-    private val mBroadcastChannel: BroadcastChannel<String> = BroadcastChannel(Channel.BUFFERED)
-    private val receiver1 = mBroadcastChannel.openSubscription()
-    private val receiver2 = mBroadcastChannel.openSubscription()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        lifecycleScope.launch {
-            receiver1.consumeEach {
-                Log.i("print_logs", "receiver1-接收: $it")
-            }
-        }
-        lifecycleScope.launch {
-            receiver2.consumeEach {
-                Log.i("print_logs", "receiver2-接收: $it")
-            }
-        }
-
-        binding.acBtnClick.setOnClickListener {
-            lifecycleScope.launch {
-                mBroadcastChannel.send("发射：${System.currentTimeMillis()}")
-            }
-        }
-
-
 
         var i = 10
         val n = ++i % 5
@@ -62,6 +42,34 @@ class MainActivity : AppCompatActivity() {
         val b = m / 10
         val c = (m - m / 100 * 100) % 10
         Log.i("print_logs", "MainActivity::onCreate: a=$a, b=$b, c=$c")
+
+        val job=lifecycleScope.launch(Dispatchers.IO) {
+            test()
+        }
+
+        runBlocking {
+            delay(500L)
+            job.cancel()
+            delay(1000)
+            Log.d("print_logs", "MainActivity::runInterruptible: 完成")
+        }
+    }
+
+    suspend fun test(){
+        //确保每一次操作地耗时不要太长，即有一个超时失败地机制,withTimeout 在超时时会抛出异常，而 withTimeoutOrNull 只会返回一个 null 值
+        val result=withTimeoutOrNull(500L){
+            runInterruptible {
+                while (true){
+                    Thread.sleep(100L)
+                    if (BuildConfig.DEBUG) {
+                        Log.i("print_logs", "MainActivity::test: do something.")
+                    }
+                }
+            }
+        }
+        if (BuildConfig.DEBUG) {
+            Log.e("print_logs", "MainActivity::test: $result")
+        }
     }
 
     private fun future() {
@@ -141,10 +149,5 @@ class MainActivity : AppCompatActivity() {
             }
             Log.e("print_logs", "handler：异常结果: ${handle.get()}")
         }
-    }
-
-    override fun onDestroy() {
-        mBroadcastChannel.close(Throwable("主动关闭"))
-        super.onDestroy()
     }
 }
